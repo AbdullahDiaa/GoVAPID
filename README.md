@@ -14,16 +14,17 @@ package main
 
 import (
 	"fmt"
-	"github.com/AbdullahDiaa/GoVAPID"
+	"github.com/AbdullahDiaa/govapid"
 )
 
 func main() {
-   VAPIDkeys, err := govapid.GenerateVAPID()
+	VAPIDkeys, err := govapid.GenerateVAPID()
 	if err != nil {
 		fmt.Println(err)
 	}
-   fmt.Println(VAPIDkeys.Public, VAPIDkeys.Private)
+	fmt.Printf("Public Key:%s\nPrivate Key:%s", VAPIDkeys.Public, VAPIDkeys.Private)
 }
+
 ```
 
 ## Documentation
