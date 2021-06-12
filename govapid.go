@@ -1,5 +1,5 @@
-//Package govapid is a micro-package to generate VAPID keys which are required for web-push
-//Voluntary Application Server Identification (VAPID) for Web Push https://datatracker.ietf.org/doc/rfc8292/
+//Package govapid is a micro-package to generate VAPID public and private keys required for sending web push notifications, the package uses standard library dependencies only.
+
 package govapid
 
 import (
