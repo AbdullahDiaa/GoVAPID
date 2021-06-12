@@ -5,7 +5,7 @@
 [![Build Status](https://www.travis-ci.com/AbdullahDiaa/GoVAPID.svg?branch=main)](https://www.travis-ci.com/AbdullahDiaa/GoVAPID)
 [![Go Report Card](https://goreportcard.com/badge/github.com/AbdullahDiaa/govapid)](https://goreportcard.com/report/github.com/AbdullahDiaa/govapid)
 
-> Micro-package to generate VAPID keys which are required for web-push, this package uses standard library dependencies only.
+> A micro-package to generate VAPID keys required for sending web push notifications, this package uses standard library dependencies only.
 
 ## Usage
 
