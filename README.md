@@ -1,8 +1,9 @@
 # GOVAPID
 
 [![GoDoc][godoc-image]][godoc-url]
-[![codecov](https://codecov.io/gh/AbdullahDiaa/GoVAPID/branch/main/graph/badge.svg?token=70SJB4GC8E)](https://codecov.io/gh/AbdullahDiaa/GoVAPID)
-[![Build Status](https://travis-ci.com/AbdullahDiaa/GoVAPID.svg?token=xpANNwyiLEp99ynBzKhp&branch=main)](https://travis-ci.com/AbdullahDiaa/GoVAPID)
+[![codecov](https://codecov.io/gh/abdullahdiaa/govapid/branch/main/graph/badge.svg?token=XY7LZ4XCK3)](https://codecov.io/gh/abdullahdiaa/govapid)
+[![Build Status](https://www.travis-ci.com/AbdullahDiaa/GoVAPID.svg?branch=main)](https://www.travis-ci.com/AbdullahDiaa/GoVAPID)
+[![Go Report Card](https://goreportcard.com/badge/github.com/AbdullahDiaa/govapid)](https://goreportcard.com/report/github.com/AbdullahDiaa/govapid)
 
 > Micro-package to generate VAPID keys which are required for web-push, this package uses standard library dependencies only.
 
