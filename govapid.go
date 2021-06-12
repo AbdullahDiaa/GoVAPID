@@ -1,5 +1,5 @@
-//Package govapid is a micro-package to generate VAPID public and private keys required for sending web push notifications, the package uses standard library dependencies only.
-
+//Package govapid is a micro-package to generate VAPID public and private keys required for sending web push notifications,
+// the package uses standard library dependencies only.
 package govapid
 
 import (
