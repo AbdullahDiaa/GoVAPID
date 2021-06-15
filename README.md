@@ -32,7 +32,7 @@ func main() {
 	claims := map[string]interface{}{
 		"aud": fmt.Sprintf("%s://%s", subURL.Scheme, subURL.Host),
 		"exp": time.Now().Add(time.Hour * 12).Unix(),
-		"sub": fmt.Sprintf("mailto:mail@mail.com")}
+		"sub": "mailto:mail@mail.com"}
 
 	AuthorizationHeader, _ := GenerateVAPIDAuth(VAPIDkeys, claims)
 	fmt.Println(AuthorizationHeader)
