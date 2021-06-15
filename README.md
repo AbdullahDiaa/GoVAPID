@@ -5,7 +5,8 @@
 [![Build Status](https://www.travis-ci.com/AbdullahDiaa/GoVAPID.svg?branch=main)](https://www.travis-ci.com/AbdullahDiaa/GoVAPID)
 [![Go Report Card](https://goreportcard.com/badge/github.com/AbdullahDiaa/govapid)](https://goreportcard.com/report/github.com/AbdullahDiaa/govapid)
 
-> A micro-package to generate VAPID keys required for sending web push notifications, the package uses standard library dependencies only.
+> A micro-package to generate VAPID public and private keys and VAPID authorization headers, required for sending web push notifications.
+> The library only supports VAPID-draft-02+ specification.
 
 ## Usage
 
@@ -18,11 +19,23 @@ import (
 )
 
 func main() {
+	//Generate VAPID keys
 	VAPIDkeys, err := govapid.GenerateVAPID()
 	if err != nil {
 		fmt.Println(err)
 	}
 	fmt.Printf("Public Key:%s\nPrivate Key:%s", VAPIDkeys.Public, VAPIDkeys.Private)
+
+	//Generate VAPID Authorization header which contains JWT signed token and VAPID public key
+	subURL, _ := url.Parse("https://fcm.googleapis.com/fcm/send/d5E6exZV5dM:APA91bHI09qFrkxTShu_pUVk-7ZukjdVhEJeZNUt29hSeBez93KlgXDK6Y9BThZMfWUqGhQ8yiWzYqT1gIGUxA5DVuwuARpJPSzk5XFp3yR1kepLKWOOdIgcAO6GRGoZYngmAFc6oufU")
+
+	claims := map[string]interface{}{
+		"aud": fmt.Sprintf("%s://%s", subURL.Scheme, subURL.Host),
+		"exp": time.Now().Add(time.Hour * 12).Unix(),
+		"sub": fmt.Sprintf("mailto:mail@mail.com")}
+
+	AuthorizationHeader, _ := GenerateVAPIDAuth(VAPIDkeys, claims)
+	fmt.Println(AuthorizationHeader)
 }
 
 ```
