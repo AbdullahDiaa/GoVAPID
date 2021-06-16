@@ -10,7 +10,7 @@ import (
 const succeed = "\u2705"
 const failed = "\u274C"
 
-//TestGenerateVAPID will test vapidkeys generation
+//TestGenerateVAPID will test VAPID Keys generation
 func TestGenerateVAPID(t *testing.T) {
 	t.Log("Make sure correct Public and Private VAPID keys are generated")
 	{
@@ -71,7 +71,7 @@ func TestVerifyClaims(t *testing.T) {
 			"sub": fmt.Sprintf("mailto:mail@mail.com")}
 
 		err := verifyClaims(claims)
-		if err.Error() != "Expiry claim (exp) already expired" {
+		if err.Error() != "expiry claim (exp) already expired" {
 			t.Fatalf("\t%s\tShould return an error with the expired date got:%s", failed, err.Error())
 		}
 		t.Logf("\t%s\tInvalid exp claim (early)", succeed)
@@ -80,7 +80,7 @@ func TestVerifyClaims(t *testing.T) {
 		claims["exp"] = time.Now().Add(time.Hour * 25).Unix()
 
 		err = verifyClaims(claims)
-		if err.Error() != "Expiry claim (exp) maximum value is 24 hours" {
+		if err.Error() != "expiry claim (exp) maximum value is 24 hours" {
 			t.Fatalf("\t%s\tShould return an error with max value of 24 hours got:%s", failed, err.Error())
 		}
 		t.Logf("\t%s\tInvalid exp claim (late)", succeed)
@@ -97,7 +97,7 @@ func TestVerifyClaims(t *testing.T) {
 		if err.Error() != "“Subscriber” claim (sub) is invalid, it should be an email or contact URL" {
 			t.Fatalf("\t%s\tShould return an error with invalid sub got:%s", failed, err.Error())
 		}
-		t.Logf("\t%s\tInvalid email format for Subscriber” field", succeed)
+		t.Logf("\t%s\tinvalid email format for Subscriber” field", succeed)
 
 		//non-https URL
 		claims["sub"] = "http://push-service.com"
@@ -106,18 +106,22 @@ func TestVerifyClaims(t *testing.T) {
 		if err.Error() != "“Subscriber” claim (sub) is invalid, it should be an email or contact URL" {
 			t.Fatalf("\t%s\tShould return an error with invalid sub got:%s", failed, err.Error())
 		}
-		t.Logf("\t%s\tInvalid URL (non-https) format for Subscriber” field", succeed)
+		t.Logf("\t%s\tinvalid URL (non-https) format for Subscriber” field", succeed)
 	}
 
 }
 
+func TestGenerateVAPIDAuth(t *testing.T) {
+
+}
+
 func ExampleGenerateVAPID() {
-	VAPIDkeys, err := GenerateVAPID()
+	VAPIDKeys, err := GenerateVAPID()
 	if err != nil {
 		fmt.Println(err)
 	}
-	//fmt.Println(VAPIDkeys.Public, VAPIDkeys.Private)
-	fmt.Println(len(VAPIDkeys.Public), len(VAPIDkeys.Private))
+
+	fmt.Println(len(VAPIDKeys.Public), len(VAPIDKeys.Private))
 	// Output:
 	// 87 43
 }

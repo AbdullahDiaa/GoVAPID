@@ -44,21 +44,21 @@ func GenerateVAPID() (VAPIDKeys, error) {
 // validateVAPIDKeys will validate the length and encoding of VAPID keys
 func validateVAPIDKeys(keys VAPIDKeys) error {
 	if len(keys.Public) != 87 {
-		return errors.New("Invalid Public key length")
+		return errors.New("invalid Public key length")
 	}
 
 	if len(keys.Private) != 43 {
-		return errors.New("Invalid Private key length")
+		return errors.New("invalid Private key length")
 	}
 
 	_, err := base64.RawURLEncoding.DecodeString(keys.Private)
 	if err != nil {
-		return errors.New("Invalid Private key")
+		return errors.New("invalid Private key")
 	}
 
 	_, err = base64.RawURLEncoding.DecodeString(keys.Public)
 	if err != nil {
-		return errors.New("Invalid Public key")
+		return errors.New("invalid Public key")
 	}
 	return nil
 }
@@ -83,10 +83,10 @@ func verifyClaims(claims map[string]interface{}) error {
 		now := time.Now().Unix()
 		tomorrow := time.Now().Add(24 * time.Hour).Unix()
 		if now > claims["exp"].(int64) {
-			return errors.New("Expiry claim (exp) already expired")
+			return errors.New("expiry claim (exp) already expired")
 		}
 		if claims["exp"].(int64) > tomorrow {
-			return errors.New("Expiry claim (exp) maximum value is 24 hours")
+			return errors.New("expiry claim (exp) maximum value is 24 hours")
 		}
 	}
 	return nil
@@ -97,7 +97,7 @@ func generateJWTSignature(keys VAPIDKeys, JWTInfoAndData string) (string, error)
 	// Preparing ecdsa.PrivateKey for signing
 	privKeyDecoded, err := base64.RawURLEncoding.DecodeString(keys.Private)
 	if err != nil {
-		return "", errors.New("Invalid VAPID private key string, cannot decode it")
+		return "", errors.New("invalid VAPID private key string, cannot decode it")
 	}
 
 	curve := elliptic.P256()
@@ -130,7 +130,7 @@ func generateJWTSignature(keys VAPIDKeys, JWTInfoAndData string) (string, error)
 	// Sign JWTInfo and JWTData using the private key
 	r, s, err := ecdsa.Sign(rand.Reader, privKey, hasher.Sum(nil))
 	if err != nil {
-		return "", errors.New("Err singing data")
+		return "", errors.New("err singing data")
 	}
 
 	curveBits := privKey.Curve.Params().BitSize
